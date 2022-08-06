@@ -1,4 +1,4 @@
-// Importaciones
+// Importaciones (variables de entorno)
 require("dotenv").config();
 
 const express = require("express");
@@ -11,6 +11,9 @@ const app = express();
 // Configurar CORS
 app.use(cors());
 
+// Permite recibir parametros en formato JSON
+app.use(express.json());
+
 // Iniciar conexión a Base de datos
 dbConnecction();
 
@@ -21,10 +24,6 @@ const httpServer = app.listen(process.env.PORT, () => {
   );
 });
 
-// Endpoint
-app.get("/", (req, res) => {
-  res.status(500).json({
-    ok: true,
-    msg: "Hola mundo",
-  });
-});
+// Rutas
+app.use("/api/usuarios", require("./routes/usuarios"));
+app.use("/api/login", require("./routes/auth"));
