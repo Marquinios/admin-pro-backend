@@ -9,6 +9,7 @@ const { validarJWT } = require("../middlewares/validar-jwt");
 
 const {
   getMedicos,
+  getMedicoById,
   crearMedico,
   actualizarMedico,
   eliminarMedico,
@@ -42,5 +43,7 @@ router.put(
 );
 
 router.delete("/:id", validarJWT, eliminarMedico);
+
+router.get("/:id", validarJWT, getMedicoById);
 
 module.exports = router;
